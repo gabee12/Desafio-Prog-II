@@ -1,10 +1,6 @@
 #include "ordenacao.h"
 
-
-/*
-PRECISA DE UM CONSTRUTOR PRA CADA STRUCT QUE VAI USAR POIS NEW T USA 
-
-*/
+using namespace std;
 
 template <typename T, typename M>
 void merge(T *vector, int init, int mid, int end, M T::*atributo){
@@ -51,5 +47,17 @@ void merge_sort(T *vector, int init, int end, M T::*atributo){
         merge_sort(vector,mid+1,end, atributo);
 
         merge(vector,init,mid,end, atributo);
+    }
+}
+
+template <typename T, typename M>
+void insertion_sort(T* vetor, int n, M T::* atributo) {
+    for (int i = 1; i < n; i++) {
+        for (int j = i; j > 0 && vetor[j].*atributo < vetor[j-1].*atributo; j--) {
+            
+            T aux = vetor[j-1];
+            vetor[j-1] = vetor[j];
+            vetor[j] = aux;
+        }
     }
 }
