@@ -5,7 +5,7 @@
 
 using namespace std;
 
-void cadastrarPessoa(Pessoa pessoas[], int capacidade, int& totalPessoas) {
+void cadastrarPessoa(Pessoa pessoas[], Ordem o, int capacidade, int& totalPessoas) {
 	if (totalPessoas < capacidade) {
 		cout << "\n----CADASTRO DE INDIVIDUOS----" << endl;
 
@@ -57,7 +57,7 @@ void cadastrarPessoa(Pessoa pessoas[], int capacidade, int& totalPessoas) {
 	}
 }
 
-void cadastrarOcorrencia(Ocorrencia ocorrencias[], int capacidade, int& totalOcorrencias) {
+void cadastrarOcorrencia(Ocorrencia ocorrencias[], Ordem o, int capacidade, int& totalOcorrencias) {
 	if (totalOcorrencias < capacidade) {
 		cout << "\n----CADASTRO DE OCORRENCIAS----" << endl;
 
@@ -123,7 +123,7 @@ void cadastrarOcorrencia(Ocorrencia ocorrencias[], int capacidade, int& totalOco
 	}
 }
 
-void cadastrarEvidencia(Evidencia evidencias[], int capacidade, int& totalEvidencias, const int totalOcorrencias) {
+void cadastrarEvidencia(Evidencia evidencias[], Ordem o, int capacidade, int& totalEvidencias, const int totalOcorrencias) {
 	if (totalEvidencias < capacidade) {
 		int idProcurado;
 		cout << "\n----CADASTRO DE EVIDENCIAS----" << endl;
@@ -132,6 +132,7 @@ void cadastrarEvidencia(Evidencia evidencias[], int capacidade, int& totalEviden
 			cin.clear();
 			cin.ignore(numeric_limits<streamsize>::max(), '\n');
 			cout << "\nErro: ID Inválido! Cadastro Cancelado\n";
+			return;
 		}
 		cin.ignore(numeric_limits<streamsize>::max(), '\n');
 

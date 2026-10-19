@@ -1,3 +1,0 @@
-# Ordenações
-
-## insertion sort
