@@ -1,9 +1,10 @@
 #include <iostream>
 #include <string> 
-#include "structs.h";
-#include "cadastros.h";
-#include "buscas.h";
-#include "ordenacao.h";
+#include <climits>
+#include "structs.h"
+#include "cadastros.h"
+#include "buscas.h"
+#include "ordenacao.cpp"
 
 using namespace std;
 
@@ -44,7 +45,9 @@ int main() {
         cout << "5- Buscar Ocorrencia" << endl;
         cout << "6- Ordenar Individuos" << endl;
         cout << "7- Ordenar Ocorrencias" << endl;
-        cout << "8- Exit" << endl;
+		cout << "8- Analisar Evidencias de Ocorrencia" << endl;
+        cout << "9- Listar Evidencias de Ocorrencia" << endl;
+		cout << "10- Sair do programa" << endl;
         cout << "escolha: ";
 
         cin >> escolha;
@@ -65,7 +68,7 @@ int main() {
 				// Cadastro de evidencias movido para função
                 cadastrarEvidencia(RegistroEvidencias, capacidadeEvidencias, TotalEvidencia, TotalOcorrencias);
                 break;
-			case 4:
+			case 4: {
 				cout << "----BUSCA DE PESSOAS----\n";
 				cout << "Insira o ID da pessoa procurada: ";
 				int id, escolhaInterna;
@@ -76,7 +79,7 @@ int main() {
 				cin >> escolhaInterna;
 				cin >> ws;
 				switch (escolhaInterna) {
-					case 1:
+					case 1: {
 						int idx = buscaSequencialPessoa(RegistroPessoas, TotalPessoas, id);
 						if (idx == -1) {
 							cout << "ID não encontrado! Cancelando busca...\n";
@@ -88,8 +91,9 @@ int main() {
 						cout << "Nome: " << RegistroPessoas[idx].nome << "\n";
 						cout << "Cidade: " << RegistroPessoas[idx].cidade << "\n";
 						break;
-					case 2:
-						int idx = buscaBinariaPessoa(RegistroPessoas, TotalPessoas, idx);
+					}
+					case 2: {
+						int idx = buscaBinariaPessoa(RegistroPessoas, TotalPessoas, id);
 						if (idx == -1) {
 							cout << "ID não encontrado! Cancelando busca...\n";
 							break;
@@ -100,12 +104,14 @@ int main() {
 						cout << "Nome: " << RegistroPessoas[idx].nome << "\n";
 						cout << "Cidade: " << RegistroPessoas[idx].cidade << "\n";
 						break;
+					}
 					default:
 						cout << "Entrada Inválida! Cancelando busca...\n";
 						break;
 				}
 				break;
-			case 5:
+			}
+			case 5: {
 				cout << "----BUSCA DE OCORRENCIAS----\n";
 				cout << "Insira o ID da ocorrencia procurada: ";
 				int id, escolhaInterna;
@@ -116,7 +122,7 @@ int main() {
 				cin >> escolhaInterna;
 				cin >> ws;
 				switch (escolhaInterna) {
-					case 1:
+					case 1: {
 						int idx = buscaSequencialOcorrencia(RegistroOcorrencias, TotalOcorrencias, id);
 						if (idx == -1) {
 							cout << "ID não encontrado! Cancelando busca...\n";
@@ -129,8 +135,9 @@ int main() {
 						cout << "Tipo: " << RegistroOcorrencias[idx].tipo << "\n";
 						cout << "Local: " << RegistroOcorrencias[idx].local << "\n";
 						break;
-					case 2:
-						int idx = buscaBinariaOcorrencia(RegistroOcorrencias, TotalOcorrencias, idx);
+					}
+					case 2: {
+						int idx = buscaBinariaOcorrencia(RegistroOcorrencias, TotalOcorrencias, id);
 						if (idx == -1) {
 							cout << "ID não encontrado! Cancelando busca...\n";
 							break;
@@ -142,12 +149,14 @@ int main() {
 						cout << "Tipo: " << RegistroOcorrencias[idx].tipo << "\n";
 						cout << "Local: " << RegistroOcorrencias[idx].local << "\n";
 						break;
+					}
 					default:
 						cout << "Entrada Inválida! Cancelando busca...\n";
 						break;
 				}
 				break;
-			case 6:
+			}
+			case 6: {
 				cout << "---ORDENAR INDIVIDUOS---\n";
 				cout << "Escolha o tipo de ordenacao:\n";
 				cout << "1 - MergeSort\n";
@@ -162,7 +171,7 @@ int main() {
 				int escolhaInterna;
 				cin >> escolhaInterna >> ws;
 				switch (escolhaInterna) {
-					case 1:
+					case 1: {
 						cout << "Ordenando por ID....\n";
 						if (escolhaOrd == 1) {
 							int* auxiliar = new int[TotalPessoas];
@@ -176,7 +185,8 @@ int main() {
 						}
 						cout << "Pessoas ordenadas por ID.\n";
 						break;
-					case 2:
+					}
+					case 2: {
 						cout << "Ordenando por Idade...\n";
 						if (escolhaOrd == 1) {
 							int* auxiliar = new int[TotalPessoas];
@@ -190,7 +200,8 @@ int main() {
 						}
 						cout << "Pessoas ordenadas por Idade.\n";
 						break;
-					case 3:
+					}
+					case 3: {
 						cout << "Ordenando por Nome....\n";
 						if (escolhaOrd == 1) {
 							int* auxiliar = new int[TotalPessoas];
@@ -204,7 +215,8 @@ int main() {
 						}
 						cout << "Pessoas ordenadas por Nome.\n";
 						break;
-					case 4:
+					}
+					case 4: {
 						cout << "Ordenando por Cidade....\n";
 						if (escolhaOrd == 1) {
 							int* auxiliar = new int[TotalPessoas];
@@ -218,12 +230,14 @@ int main() {
 						}
 						cout << "Pessoas ordenadas por Cidade.\n";
 						break;
+					}
 					default:
 						cout << "Escolha de campo invalida! Cancelando...\n";
 						break;
 				}
 				break;
-			case 7:
+			}
+			case 7: {
 				cout << "---ORDENAR OCORRENCIAS---\n";
 				cout << "Escolha o tipo de ordenacao:\n";
 				cout << "1 - MergeSort\n";
@@ -239,10 +253,10 @@ int main() {
 				int escolhaInterna;
 				cin >> escolhaInterna >> ws;
 				switch (escolhaInterna) {
-					case 1:
+					case 1: {
 						cout << "Ordenando por ID....\n";
 						if (escolhaOrd == 1) {
-							int* auxiliar = new int[TotalPessoas];
+							int* auxiliar = new int[TotalOcorrencias];
 							merge_sort(RegistroOcorrencias, OrdenacaoOcorrencias.ord, auxiliar, 0, TotalOcorrencias - 1, &Ocorrencia::id);
 							delete[] auxiliar;
 						} else if (escolhaOrd == 2) {
@@ -253,10 +267,11 @@ int main() {
 						}
 						cout << "Ocorrencias ordenadas por ID.\n";
 						break;
-					case 2:
+					}
+					case 2: {
 						cout << "Ordenando por Gravidade...\n";
 						if (escolhaOrd == 1) {
-							int* auxiliar = new int[TotalPessoas];
+							int* auxiliar = new int[TotalOcorrencias];
 							merge_sort(RegistroOcorrencias, OrdenacaoOcorrencias.ord, auxiliar, 0, TotalOcorrencias - 1, &Ocorrencia::gravidade);
 							delete[] auxiliar;
 						} else if (escolhaOrd == 2) {
@@ -267,10 +282,11 @@ int main() {
 						}
 						cout << "Ocorrencias ordenadas por Gravidade.\n";
 						break;
-					case 3:
+					}
+					case 3: {
 						cout << "Ordenando por Ano....\n";
 						if (escolhaOrd == 1) {
-							int* auxiliar = new int[TotalPessoas];
+							int* auxiliar = new int[TotalOcorrencias];
 							merge_sort(RegistroOcorrencias, OrdenacaoOcorrencias.ord, auxiliar, 0, TotalOcorrencias - 1, &Ocorrencia::ano);
 							delete[] auxiliar;
 						} else if (escolhaOrd == 2) {
@@ -281,10 +297,11 @@ int main() {
 						}
 						cout << "Ocorrencias ordenadas por Ano.\n";
 						break;
-					case 4:
+					}
+					case 4: {
 						cout << "Ordenando por Tipo....\n";
 						if (escolhaOrd == 1) {
-							int* auxiliar = new int[TotalPessoas];
+							int* auxiliar = new int[TotalOcorrencias];
 							merge_sort(RegistroOcorrencias, OrdenacaoOcorrencias.ord, auxiliar, 0, TotalOcorrencias - 1, &Ocorrencia::tipo);
 							delete[] auxiliar;
 						} else if (escolhaOrd == 2) {
@@ -295,10 +312,11 @@ int main() {
 						}
 						cout << "Ocorrencias ordenadas por Tipo.\n";
 						break;
-					case 5:
+					}
+					case 5: {
 						cout << "Ordenando por Local....\n";
 						if (escolhaOrd == 1) {
-							int* auxiliar = new int[TotalPessoas];
+							int* auxiliar = new int[TotalOcorrencias];
 							merge_sort(RegistroOcorrencias, OrdenacaoOcorrencias.ord, auxiliar, 0, TotalOcorrencias - 1, &Ocorrencia::local);
 							delete[] auxiliar;
 						} else if (escolhaOrd == 2) {
@@ -309,21 +327,67 @@ int main() {
 						}
 						cout << "Ocorrencias ordenadas por Local.\n";
 						break;
+					}
 					default:
 						cout << "Escolha de campo invalida! Cancelando...\n";
 						break;
 				}
 				break;
-            case 8:
+			}
+			case 8: {
+				cout << "ID da ocorrencia para analise: ";
+				int idOcorrencia;
+				
+				if (!(cin >> idOcorrencia)) {
+					if (!cin.eof()) {
+						cin.clear();
+						cin.ignore(numeric_limits<streamsize>::max(), '\n');
+					}
+					cout << "ID Inválido! Análise cancelada\n";
+					break;
+				}
+
+				cin.ignore(numeric_limits<streamsize>::max(), '\n');
+				
+				analisarOcorrencia(RegistroEvidencias, TotalEvidencia, idOcorrencia);
+				break;
+			}
+			case 9: {
+				cout << "ID da ocorrencia para listagem: ";
+				int idOcorrencia;
+
+				if (!(cin >> idOcorrencia)) {
+					if (!cin.eof()) {
+						cin.clear();
+						cin.ignore(numeric_limits<streamsize>::max(), '\n');
+					}
+					cout << "ID Inválido! Listagem cancelada\n";
+					break;
+				}
+
+				cin.ignore(numeric_limits<streamsize>::max(), '\n');
+
+				if (idOcorrencia < 1 || idOcorrencia > TotalOcorrencias) {
+					cout << "Ocorrencia nao encontrada!\n";
+					break;
+				}
+
+				listarEvidencias(RegistroEvidencias, TotalEvidencia, idOcorrencia);
+				break;
+			}
+            case 10:
                 cout << "\nSaindo do sistema..." << endl;
                 break;
-
             default:
                 cout << "\nOpcao invalida!" << endl;
                 break;
         } 
 
-    } while (escolha != 8); 
+    } while (escolha != 10); 
     
+
+	delete[] RegistroPessoas;
+	delete[] RegistroOcorrencias;
+	delete[] RegistroEvidencias;
     return 0;
 }

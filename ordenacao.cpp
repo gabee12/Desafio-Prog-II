@@ -1,5 +1,4 @@
-#include "structs.h";
-#include "ordenacao.h"
+#include "structs.h"
 #include <cstring>
 #include <type_traits>
 
@@ -16,25 +15,25 @@ bool menorAtributo(const T& a, const T& b, M T::* atributo) {
 
 template <typename T, typename M>
 void merge(const T *vector, int indices[], int auxiliar[], int init, int mid, int end, M T::*atributo){
-    int i = init, j = mid+1, k = inicio;
+    int i = init, j = mid+1, k = init;
 
     while (i <= mid && j <= end){
-        if(menorAtributo(vector[indices[i]], vector[indices[j]], atributo)) {
+        if (menorAtributo(vector[indices[j]], vector[indices[i]], atributo)) {
             auxiliar[k++] = indices[j++];
-        }else{
-            auxiliar[k++] = vector[i++];
+        } else{
+            auxiliar[k++] = indices[i++];
         }
     }
 
     while(i <= mid){
-        auxiliar[k++] = vector[i++];
+        auxiliar[k++] = indices[i++];
     }
 
     while(j <= end){
-        auxiliar[k++] = vector[j++];
+        auxiliar[k++] = indices[j++];
     }
 
-    for(int i = inicio; i <= fim; i++){
+    for(int i = init; i <= end; i++){
         indices[i] = auxiliar[i]; 
     }
 }

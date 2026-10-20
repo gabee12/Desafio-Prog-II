@@ -1,5 +1,5 @@
 #pragma once
-#include "structs.h";
+#include "structs.h"
 
 using namespace std;
 

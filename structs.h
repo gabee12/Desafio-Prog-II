@@ -18,6 +18,7 @@ struct Evidencia {
 	int id;
 	int idOcorrencia;
 	int relevancia;
+	int idEvidenciaPai; // Vamos modelar as evidencias relacionadas como uma árvore e atravessa-lá recursivamente
 	char descricao[100];
 };
 

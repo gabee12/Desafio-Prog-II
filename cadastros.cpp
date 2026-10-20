@@ -5,7 +5,7 @@
 
 using namespace std;
 
-void cadastrarPessoa(Pessoa pessoas[], Ordem o, int capacidade, int& totalPessoas) {
+void cadastrarPessoa(Pessoa pessoas[], int capacidade, int& totalPessoas) {
 	if (totalPessoas < capacidade) {
 		cout << "\n----CADASTRO DE INDIVIDUOS----" << endl;
 
@@ -57,7 +57,7 @@ void cadastrarPessoa(Pessoa pessoas[], Ordem o, int capacidade, int& totalPessoa
 	}
 }
 
-void cadastrarOcorrencia(Ocorrencia ocorrencias[], Ordem o, int capacidade, int& totalOcorrencias) {
+void cadastrarOcorrencia(Ocorrencia ocorrencias[], int capacidade, int& totalOcorrencias) {
 	if (totalOcorrencias < capacidade) {
 		cout << "\n----CADASTRO DE OCORRENCIAS----" << endl;
 
@@ -123,7 +123,7 @@ void cadastrarOcorrencia(Ocorrencia ocorrencias[], Ordem o, int capacidade, int&
 	}
 }
 
-void cadastrarEvidencia(Evidencia evidencias[], Ordem o, int capacidade, int& totalEvidencias, const int totalOcorrencias) {
+void cadastrarEvidencia(Evidencia evidencias[], int capacidade, int& totalEvidencias, const int totalOcorrencias) {
 	if (totalEvidencias < capacidade) {
 		int idProcurado;
 		cout << "\n----CADASTRO DE EVIDENCIAS----" << endl;
@@ -149,6 +149,26 @@ void cadastrarEvidencia(Evidencia evidencias[], Ordem o, int capacidade, int& to
 		nova.idOcorrencia = idProcurado;
 
 		cout << "ID Evidencia: " << nova.id << endl;
+
+		cout << "ID Evidencia-Pai (0 = nenhuma): ";
+		
+		if(!(cin >> nova.idEvidenciaPai)) {
+			if (!cin.eof()) {
+				cin.clear();
+				cin.ignore(numeric_limits<streamsize>::max(), '\n');
+			}
+			cout << "ID da evidencia-pai invalido! Cadastro cancelado...\n";
+			return;
+		}
+		cin.ignore(numeric_limits<streamsize>::max(), '\n');
+
+		if (nova.idEvidenciaPai != 0) {
+			int pai = nova.idEvidenciaPai - 1;
+			if (nova.idEvidenciaPai < 1 || nova.idEvidenciaPai > totalEvidencias || evidencias[pai].id != nova.idEvidenciaPai || evidencias[pai].idOcorrencia != idProcurado) {
+				cout << "Evidencia-pai inexistente ou relacionada a outra ocorrencia! Cancelando cadastro...\n";
+				return;
+			}
+		}
 
 		cout << "Insira a descricao da evidencia: ";
 		

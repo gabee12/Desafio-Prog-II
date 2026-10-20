@@ -99,6 +99,7 @@ void listarEvidencias(const Evidencia evidencias[], int quantidade, int idOcorre
             cout << "ID da evidencia: " << evidencias[i].id << endl;
             cout << "Descricao: " << evidencias[i].descricao << endl;
             cout << "Relevancia: " << evidencias[i].relevancia << endl;
+			cout << "ID Evidencia Pai: " << evidencias[i].idEvidenciaPai << endl;
             cout << endl;
 
             encontrou = true;

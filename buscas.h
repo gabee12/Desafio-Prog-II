@@ -1,5 +1,5 @@
 #pragma once
-#include "structs.h";
+#include "structs.h"
 
 int buscaSequencialPessoa(const Pessoa pessoas[], int quantidade, int id);
 
