@@ -6,10 +6,16 @@
 #include "buscas.h"
 #include "ordenacao.cpp"
 #include "recursividade.h"
+#include "desempenho.h"
 
 using namespace std;
 
-int main() {
+int main(int argc, char* argv[]) { // Adicionar modo nao interativo para benchmark
+	if (argc > 1 && string(argv[1]) == "--benchmark") {
+		return gerarRelatorio(cout, argc > 2 ? argv[2] : "relatorio_desempenho.csv") ? 0 : 1;
+	}
+
+
 	// Para alterar o número máximo de registros sem necessitar alterações estruturais
 	static int capacidadePessoas = 10000;
 	static int capacidadeOcorrencias = 5000;
@@ -48,11 +54,12 @@ int main() {
         cout << "7- Ordenar Ocorrencias" << endl;
 		cout << "8- Analisar Evidencias de Ocorrencia" << endl;
         cout << "9- Listar Evidencias de Ocorrencia" << endl;
-		cout << "10- Sair do programa" << endl;
-        cout << "escolha: ";
+		cout << "10- Gerar relatorio de desempenho" << endl;
+		cout << "11- Sair do programa" << endl;
+        cout << "Escolha: ";
 
         cin >> escolha;
-       	cin >> ws; // Consome o espaço branco renanescente. Ajuda a evitar problemas com a alternancia de cin >> e cin.getline
+		cin.ignore(numeric_limits<streamsize>::max(), '\n'); // Consome o espaço branco renanescente. Ajuda a evitar problemas com a alternancia de cin >> e cin.getline
 
         switch (escolha) {
             case 1:
@@ -78,7 +85,7 @@ int main() {
 				cout << "1 - Sequencial\n";
 				cout << "2 - Binária\n";
 				cin >> escolhaInterna;
-				cin >> ws;
+				cin.ignore(numeric_limits<streamsize>::max(), '\n');
 				switch (escolhaInterna) {
 					case 1: {
 						int idx = buscaSequencialPessoa(RegistroPessoas, TotalPessoas, id);
@@ -121,7 +128,7 @@ int main() {
 				cout << "1 - Sequencial\n";
 				cout << "2 - Binária\n";
 				cin >> escolhaInterna;
-				cin >> ws;
+				cin.ignore(numeric_limits<streamsize>::max(), '\n');
 				switch (escolhaInterna) {
 					case 1: {
 						int idx = buscaSequencialOcorrencia(RegistroOcorrencias, TotalOcorrencias, id);
@@ -163,14 +170,16 @@ int main() {
 				cout << "1 - MergeSort\n";
 				cout << "2 - InsertionSort\n";
 				int escolhaOrd;
-				cin >> escolhaOrd >> ws;
+				cin >> escolhaOrd;
+				cin.ignore(numeric_limits<streamsize>::max(), '\n');
 				cout << "Escolha por qual campo ordenar os individuos:\n";
 				cout << "1 - ID\n";
 				cout << "2 - Idade\n";
 				cout << "3 - Nome\n";
 				cout << "4 - Cidade\n";
 				int escolhaInterna;
-				cin >> escolhaInterna >> ws;
+				cin >> escolhaInterna;
+				cin.ignore(numeric_limits<streamsize>::max(), '\n');
 				switch (escolhaInterna) {
 					case 1: {
 						cout << "Ordenando por ID....\n";
@@ -244,7 +253,8 @@ int main() {
 				cout << "1 - MergeSort\n";
 				cout << "2 - InsertionSort\n";
 				int escolhaOrd;
-				cin >> escolhaOrd >> ws;
+				cin >> escolhaOrd;
+				cin.ignore(numeric_limits<streamsize>::max(), '\n');
 				cout << "Escolha por qual campo ordenar os individuos:\n";
 				cout << "1 - ID\n";
 				cout << "2 - Gravidade\n";
@@ -252,7 +262,8 @@ int main() {
 				cout << "4 - Tipo\n";
 				cout << "5 - Local\n";
 				int escolhaInterna;
-				cin >> escolhaInterna >> ws;
+				cin >> escolhaInterna;
+				cin.ignore(numeric_limits<streamsize>::max(), '\n');
 				switch (escolhaInterna) {
 					case 1: {
 						cout << "Ordenando por ID....\n";
@@ -376,7 +387,10 @@ int main() {
 				listarEvidencias(RegistroEvidencias, TotalEvidencia, idOcorrencia);
 				break;
 			}
-            case 10:
+			case 10:
+				gerarRelatorio(cout);
+				break;
+            case 11:
                 cout << "\nSaindo do sistema..." << endl;
                 break;
             default:
@@ -384,7 +398,7 @@ int main() {
                 break;
         } 
 
-    } while (escolha != 10); 
+    } while (escolha != 11); 
     
 
 	delete[] RegistroPessoas;

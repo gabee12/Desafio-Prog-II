@@ -4,10 +4,11 @@
 using namespace std;
 
 // Busca pessoa pelo id, comparando um por um 
-int buscaSequencialPessoa(const Pessoa pessoas[], int quantidade, int id)
+int buscaSequencialPessoa(const Pessoa pessoas[], int quantidade, int id, Metricas* metricas)
 {
     for (int i = 0; i < quantidade; i++)
     {
+		if (metricas) ++metricas->comparacoes;
         if (pessoas[i].id == id)
         {
             return i;
@@ -18,7 +19,7 @@ int buscaSequencialPessoa(const Pessoa pessoas[], int quantidade, int id)
 }
 
 // Busca pessoa pelo id dividindo o vetor ao meio a cada passo
-int buscaBinariaPessoa(const Pessoa pessoas[], int quantidade, int id)
+int buscaBinariaPessoa(const Pessoa pessoas[], int quantidade, int id, Metricas* metricas)
 {
     int inicio = 0;
     int fim = quantidade - 1;
@@ -27,11 +28,13 @@ int buscaBinariaPessoa(const Pessoa pessoas[], int quantidade, int id)
     {
         int meio = inicio + (fim - inicio) / 2;
 
+		if (metricas) ++metricas->comparacoes;
         if (pessoas[meio].id == id)
         {
             return meio;
         }
 
+		if (metricas) ++metricas->comparacoes;
         if (pessoas[meio].id < id)
         {
             inicio = meio + 1;
@@ -46,10 +49,11 @@ int buscaBinariaPessoa(const Pessoa pessoas[], int quantidade, int id)
 }
 
 // Busca ocorrencia pelo id comparando um por um
-int buscaSequencialOcorrencia(const Ocorrencia ocorrencias[], int quantidade, int id)
+int buscaSequencialOcorrencia(const Ocorrencia ocorrencias[], int quantidade, int id, Metricas* metricas)
 {
     for (int i = 0; i < quantidade; i++)
     {
+		if (metricas) ++metricas->comparacoes;
         if (ocorrencias[i].id == id)
         {
             return i;
@@ -60,7 +64,7 @@ int buscaSequencialOcorrencia(const Ocorrencia ocorrencias[], int quantidade, in
 }
 
 // Busca ocorrencia pelo id dividindo o vetor ao meio a cada passo
-int buscaBinariaOcorrencia(const Ocorrencia ocorrencias[], int quantidade, int id)
+int buscaBinariaOcorrencia(const Ocorrencia ocorrencias[], int quantidade, int id, Metricas* metricas)
 {
     int inicio = 0;
     int fim = quantidade - 1;
@@ -69,11 +73,13 @@ int buscaBinariaOcorrencia(const Ocorrencia ocorrencias[], int quantidade, int i
     {
         int meio = inicio + (fim - inicio) / 2;
 
+		if (metricas) ++metricas->comparacoes;
         if (ocorrencias[meio].id == id)
         {
             return meio;
         }
 
+		if (metricas) ++metricas->comparacoes;
         if (ocorrencias[meio].id < id)
         {
             inicio = meio + 1;
