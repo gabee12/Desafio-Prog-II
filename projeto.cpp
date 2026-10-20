@@ -5,6 +5,7 @@
 #include "cadastros.h"
 #include "buscas.h"
 #include "ordenacao.cpp"
+#include "recursividade.h"
 
 using namespace std;
 
