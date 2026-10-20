@@ -1,2 +1,9 @@
+latex/*.aux
+latex/*.out
+latex/*.log
+latex/*.synctex.gz
+latex/*.tex
+latex/*.toc
+latex/*.cls
 *.csv
 out/

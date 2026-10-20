@@ -10,11 +10,10 @@
 
 using namespace std;
 
-int main(int argc, char* argv[]) { // Adicionar modo nao interativo para benchmark
+int main(int argc, char* argv[]) { // Adicionar modo nao interativo para benchmark (passar a flag --benchmark para utilizar)
 	if (argc > 1 && string(argv[1]) == "--benchmark") {
 		return gerarRelatorio(cout, argc > 2 ? argv[2] : "relatorio_desempenho.csv") ? 0 : 1;
 	}
-
 
 	// Para alterar o número máximo de registros sem necessitar alterações estruturais
 	static int capacidadePessoas = 10000;
@@ -53,9 +52,11 @@ int main(int argc, char* argv[]) { // Adicionar modo nao interativo para benchma
         cout << "6- Ordenar Individuos" << endl;
         cout << "7- Ordenar Ocorrencias" << endl;
 		cout << "8- Analisar Evidencias de Ocorrencia" << endl;
-        cout << "9- Listar Evidencias de Ocorrencia" << endl;
-		cout << "10- Gerar relatorio de desempenho" << endl;
-		cout << "11- Sair do programa" << endl;
+		cout << "9- Listar Ocorrencias" << endl;
+		cout << "10- Listar Individuos" << endl;
+        cout << "11- Listar Evidencias de Ocorrencia" << endl;
+		cout << "12- Gerar relatorio de desempenho" << endl;
+		cout << "13- Sair do programa" << endl;
         cout << "Escolha: ";
 
         cin >> escolha;
@@ -365,6 +366,35 @@ int main(int argc, char* argv[]) { // Adicionar modo nao interativo para benchma
 				break;
 			}
 			case 9: {
+				cout << "---LISTAGEM DE OCORRENCIAS---\n";
+				cout << "A listagem e limitada as 10 primeiras ocorrencias. Para encontrar uma ocorrencia especifica, utilize a funcao 5.\n";
+				int lim = min(TotalOcorrencias, 10);
+				for (int i = 0; i < lim; i++) {
+					Ocorrencia o = RegistroOcorrencias[OrdenacaoOcorrencias.ord[i]];
+					cout << "===============\n";
+					cout << "ID: " << o.id << "\n";
+					cout << "Tipo: " << o.tipo << "\n";
+					cout << "Gravidade: " << o.gravidade << "\n";
+					cout << "Local: " << o.local << "\n";
+					cout << "Ano: " << o.ano << "\n";
+				}
+				break;
+			}
+			case 10: {
+				cout << "---LISTAGEM DE INDIVIDUOS---\n";
+				cout << "A listagem e limitada aos 10 primeiros individuos. Para encontrar um individuo especifico, utilize a funcao 4.\n";
+				int lim = min(TotalPessoas, 10);
+				for (int i = 0; i < lim; i++) {
+					Pessoa p = RegistroPessoas[OrdenacaoPessoas.ord[i]];
+					cout << "===============\n";
+					cout << "Nome: " << p.nome << "\n";
+					cout << "Idade: " << p.idade << "\n";
+					cout << "Cidade: " << p.cidade << "\n";
+					cout << "ID: " << p.id << "\n";
+				}
+				break;
+			}
+			case 11: {
 				cout << "ID da ocorrencia para listagem: ";
 				int idOcorrencia;
 
@@ -387,10 +417,10 @@ int main(int argc, char* argv[]) { // Adicionar modo nao interativo para benchma
 				listarEvidencias(RegistroEvidencias, TotalEvidencia, idOcorrencia);
 				break;
 			}
-			case 10:
+			case 12:
 				gerarRelatorio(cout);
 				break;
-            case 11:
+            case 13:
                 cout << "\nSaindo do sistema..." << endl;
                 break;
             default:
@@ -398,7 +428,7 @@ int main(int argc, char* argv[]) { // Adicionar modo nao interativo para benchma
                 break;
         } 
 
-    } while (escolha != 11); 
+    } while (escolha != 13); 
     
 
 	delete[] RegistroPessoas;

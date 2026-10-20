@@ -2,8 +2,18 @@
 #include <iostream>
 #include <chrono>
 #include <limits>
+#include <cctype>
 
 using namespace std;
+
+bool textoVazio(const char* texto) {
+	for (int i = 0; texto[i] != '\0'; i++) {
+		if (!isspace(static_cast<unsigned char>(texto[i]))) {
+			return false;
+		}
+	}
+	return true;
+}
 
 void cadastrarPessoa(Pessoa pessoas[], int capacidade, int& totalPessoas) {
 	if (totalPessoas < capacidade) {
@@ -19,6 +29,11 @@ void cadastrarPessoa(Pessoa pessoas[], int capacidade, int& totalPessoas) {
 			cin.clear();
 			cin.ignore(numeric_limits<streamsize>::max(), '\n');
 			cout << "Nome invalido! Cadastro cancelado.\n";
+			return;
+		}
+
+		if (textoVazio(nova.nome)) {
+			cout << "Campo Nome não pode ficar vazio! Cancelando cadastro...";
 			return;
 		}
 
@@ -43,6 +58,11 @@ void cadastrarPessoa(Pessoa pessoas[], int capacidade, int& totalPessoas) {
 			cin.clear();
 			cin.ignore(numeric_limits<streamsize>::max(), '\n');
 			cout << "Cidade invalida! Cadastro cancelado.\n";
+			return;
+		}
+
+		if (textoVazio(nova.cidade)) {
+			cout << "Campo Cidade não pode ficar vazio! Cancelando cadastro...";
 			return;
 		}
 
@@ -104,11 +124,21 @@ void cadastrarOcorrencia(Ocorrencia ocorrencias[], int capacidade, int& totalOco
 			return;
 		}
 
+		if (textoVazio(nova.tipo)) {
+			cout << "Campo Tipo não pode ficar vazio! Cancelando cadastro...";
+			return;
+		}
+
 		cout << "Local: ";
 		if (!cin.getline(nova.local, sizeof(nova.local))) {
 			cin.clear();
 			cin.ignore(numeric_limits<streamsize>::max(), '\n');
 			cout << "Local invalido! Cadastro cancelado.\n";
+			return;
+		}
+
+		if (textoVazio(nova.local)) {
+			cout << "Campo Local não pode ficar vazio! Cancelando cadastro...";
 			return;
 		}
 
@@ -176,6 +206,11 @@ void cadastrarEvidencia(Evidencia evidencias[], int capacidade, int& totalEviden
 			cin.clear();
 			cin.ignore(numeric_limits<streamsize>::max(), '\n');
 			cout << "Descricao invalida! Cadastro cancelado.\n";
+			return;
+		}
+
+		if (textoVazio(nova.descricao)) {
+			cout << "Campo Descricao não pode ficar vazio! Cancelando cadastro...";
 			return;
 		}
 
